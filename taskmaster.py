@@ -1,24 +1,35 @@
 #!/usr/bin/python
 import commands
+import argparse
 
 def switchMenu(choice):
 
-	if(choice == "exit"):
-		commands.quit();
+	#split input into a list. Command will be in argv[0] and parameters after
+	argv = choice.split(" ");
+	argc = len(argv)
+
+	if(argv[0] == "exit"):
+		if(argc == 1):
+			commands.quit();
+		else:
+			print("/!\\ Error : exit command doesn't take parameters /!\\")
 	
-	elif(choice == "status"):
-		commands.status();
-	
-	elif(choice == "start"):
+	elif(argv[0] == "status"):
+		if(argc <= 3):
+			commands.status(argv[1], argv[2]);
+		else:
+			print("/!\\ Error : status command doesn't take more than 2 parameters /!\\")
+		
+	elif(argv[0] == "start"):
 		commands.start();
 
-	elif(choice == "stop"):
-	commands.stop();
+	elif(argv[0] == "stop"):
+		commands.stop();
 
-	elif(choice == "restart"):
-	commands.restart();
+	elif(argv[0] == "restart"):
+		commands.restart();
 
-	elif(choice == "reload"):
+	elif(argv[0] == "reload"):
 		commands.reload();
 
 	else:
@@ -29,6 +40,7 @@ def switchMenu(choice):
 print(" -- Start ! -- ")
 
 while True:
+	
     switchMenu(input("--> "))
 
 

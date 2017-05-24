@@ -1,11 +1,15 @@
 #to stop taskmaster manually
 def quit():
-	print(" -- End ! -- ")
-	exit(0);
+	#ask user to confirm program closure
+	if(input("/!\\ Information : Taskmaster is about to close, press y to quit /!\\\n--> ") == "y"):
+		exit(0);
+	else:
+		print("/!\\ Information : Closure canceled /!\\ ")
 
 #status of all the programs described in the config file, or a specific program, or a specific instance of a program
 def status(program=None, pid=None):
-	print("TODO");
+	print(program)
+	print(pid);
 
 #start a new instance of a program
 def start(program):
