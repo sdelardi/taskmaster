@@ -1,5 +1,8 @@
 #!/usr/bin/python
 import commandsController
+def set_programs():
+	global programs
+	programs = parsing("config.conf")
 
 def switchMenu(choice):
 
@@ -43,7 +46,7 @@ def switchMenu(choice):
 ##########################################################################
 
 print(" -- Start ! -- ")
-
+set_programs()
 while True:
 	
     switchMenu(input("--> "))
