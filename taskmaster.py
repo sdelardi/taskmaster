@@ -1,39 +1,44 @@
 #!/usr/bin/python
-import commands
-import argparse
+import commandsController
 
 def switchMenu(choice):
 
-	#split input into a list. Command will be in argv[0] and parameters after
-	argv = choice.split(" ");
-	argc = len(argv)
+	#User input is splitted into a command and its parameters
+	choice = choice.split(" ")
 
-	if(argv[0] == "exit"):
-		if(argc == 1):
-			commands.quit();
-		else:
-			print("/!\\ Error : exit command doesn't take parameters /!\\")
-	
-	elif(argv[0] == "status"):
-		if(argc <= 3):
-			commands.status(argv[1], argv[2]);
-		else:
-			print("/!\\ Error : status command doesn't take more than 2 parameters /!\\")
+	command = choice[0]
+	parametersSize = len(choice) - 1
+	parameters = []
+
+	if(parametersSize > 0):
+		for i in range(1, parametersSize + 1):
+			parameters.append(choice[i])
+
+	#Debug only
+	print("Command: " + command)
+	print("Parameters: " + str(parameters or ""))
+
+	#Switch
+	if(command == "exit"):
+		commandsController.quitController()
 		
-	elif(argv[0] == "start"):
-		commands.start();
+	elif(command == "status"):
+		commandsController.statusController(parametersSize, parameters)
+		
+	elif(command == "start"):
+		commandsController.startController(parametersSize, parameters)
 
-	elif(argv[0] == "stop"):
-		commands.stop();
+	elif(command == "stop"):
+		commandsController.stopController(parametersSize, parameters)
 
-	elif(argv[0] == "restart"):
-		commands.restart();
+	elif(command == "restart"):
+		commandsController.restartController(parametersSize, parameters)
 
-	elif(argv[0] == "reload"):
-		commands.reload();
+	elif(command == "reload"):
+		commandsController.reloadController()
 
 	else:
-		commands.default();
+		commandsController.defaultController()
 
 ##########################################################################
 
