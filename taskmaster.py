@@ -1,8 +1,9 @@
 #!/usr/bin/python
 import commandsController
+import parse_config
 def set_programs():
 	global programs
-	programs = parsing("config.conf")
+	programs = parse_config.parsing("config.conf")
 
 def switchMenu(choice):
 
