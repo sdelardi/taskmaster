@@ -19,5 +19,3 @@ def parsing(file_name):
 	programs = parseConfig(file)
 	file.close()
 	return programs
-
-parsing("config.conf")
