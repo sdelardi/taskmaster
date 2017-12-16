@@ -1,20 +1,18 @@
-<programs>
-	<nginx>
-		<cmd>/usr/local/bin/nginx -c /etc/nginx/test.conf</cmd>
-		<num_procs>1</num_procs>
-		<autostart>true</autostart>
-		<restart>unexpected</restart>
-		<exit_codes>0</exit_codes>
-		<starting_time>10</starting_time>
-		<retry_abort>3</retry_abort>
-		<legit_signal>SIGQUIT</legit_signal>
-		<time_kill>15</time_kill>
-		<stdout>file</stdout>
-		<stdout_file>toto.txt</stdout_file>
-		<stderr>discard</stderr>
-		<stderr_file></stderr_file>
-		<env_vars>PATH=/bin,USER=toto</env_vars>
-		<work_dir>/tmp/</work_dir>
-		<umask>755</umask>
-	</nginx>
-</programs>
+<program name=nginx>
+	<cmd>/usr/local/bin/nginx -c /etc/nginx/test.conf</cmd>
+	<num_procs>1</num_procs>
+	<autostart>true</autostart>
+	<restart>unexpected</restart>
+	<exit_codes>0</exit_codes>
+	<starting_time>10</starting_time>
+	<retry_abort>3</retry_abort>
+	<legit_signal>SIGQUIT</legit_signal>
+	<time_kill>15</time_kill>
+	<stdout>file</stdout>
+	<stdout_file>toto.txt</stdout_file>
+	<stderr>discard</stderr>
+	<stderr_file></stderr_file>
+	<env_vars>PATH=/bin,USER=toto</env_vars>
+	<work_dir>/tmp/</work_dir>
+	<umask>755</umask>
+</program>
