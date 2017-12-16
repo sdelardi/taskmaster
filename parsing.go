@@ -142,8 +142,10 @@ func check_time_kill(Time_kill string) uint {
 }
 
 func check_stdout(Stdout string) string {
-	//TODO
-	return "";
+	if !(Stdout == "discard" || Stdout == "file" || Stdout == "") {
+		rise_error(errors.New("Stdout has wrong value"));
+	}
+	return Stdout;
 }
 
 func check_stdout_file(Stdout_file string) string {
@@ -152,8 +154,10 @@ func check_stdout_file(Stdout_file string) string {
 }
 
 func check_stderr(Stderr string) string {
-	//TODO
-	return "";
+	if !(Stderr == "discard" || Stderr == "file" || Stderr == "") {
+		rise_error(errors.New("Stderr has wrong value"));
+	}
+	return Stderr;
 }
 
 func check_stderr_file(Stderr_file string) string {
