@@ -1,4 +1,4 @@
-<program name=nginx>
+<program name='nginx'>
 	<cmd>/usr/local/bin/nginx -c /etc/nginx/test.conf</cmd>
 	<num_procs>1</num_procs>
 	<autostart>true</autostart>
