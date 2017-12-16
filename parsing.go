@@ -85,8 +85,18 @@ func check_exit_codes(Exit_codes string) []int {
 }
 
 func check_starting_time(Starting_time string) uint {
-	//TODO
-	return 0;
+	var starting_time int;
+	var err error;
+
+	if Starting_time == "" {
+		return 0;
+	}
+	starting_time, err = strconv.Atoi(Starting_time);
+	rise_error(err);
+	if starting_time < 0 {
+		rise_error(errors.New("Starting_time is negative"));
+	}
+	return uint(starting_time);
 }
 
 func check_retry_abort(Retry_abort string) uint {
@@ -161,8 +171,7 @@ func check_env_vars(Env_vars string) []string {
 }
 
 func check_work_dir(Work_dir string) string {
-	//TODO
-	return "";
+	return Work_dir;
 }
 
 func check_umask(Umask string) uint {
