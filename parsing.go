@@ -22,7 +22,7 @@ func check_name(Name string) string {
 	for i := 0; i < len(Name); i++ {
 		c := Name[i];
 		if !((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
-			rise_error(errors.New("Name is not correctly formatted, only letters and digits are allowed"));
+			rise_error(errors.New("Name is not correctly formatted"));
 		}
 	}
 	return Name;
@@ -90,18 +90,45 @@ func check_starting_time(Starting_time string) uint {
 }
 
 func check_retry_abort(Retry_abort string) uint {
-	//TODO
-	return 0;
+	var trys int;
+	var err error;
+	if Retry_abort == "" {
+		rise_error(errors.New("Retry_abort is empty"));
+	}
+	trys, err = strconv.Atoi(Retry_abort);
+	rise_error(err);
+	if trys < 0 {
+		rise_error(errors.New("Retry_abort is < 0"));
+	}
+	return uint(trys);
 }
 
 func check_legit_signal(Legit_signal string) string {
-	//TODO
-	return "";
+	if Legit_signal == "" {
+		rise_error(errors.New("Legit_signal is empty"));
+	}
+	for i := 0; i < len(Legit_signal); i++ {
+		c := Legit_signal[i];
+		if !((c >= 48 && c <= 57) || (c >= 65 && c <= 90)) {
+			rise_error(errors.New("Legit_signal is not correctly formatted"));
+		}
+	}
+	return Legit_signal;
 }
 
 func check_time_kill(Time_kill string) uint {
-	//TODO
-	return 0;
+	var time_kill int;
+	var err error;
+
+	if Time_kill == "" {
+		return 0;
+	}
+	time_kill, err = strconv.Atoi(Time_kill);
+	rise_error(err);
+	if time_kill < 0 {
+		rise_error(errors.New("Time_kill is < 0"));
+	}
+	return uint(time_kill);
 }
 
 func check_stdout(Stdout string) string {
@@ -125,8 +152,12 @@ func check_stderr_file(Stderr_file string) string {
 }
 
 func check_env_vars(Env_vars string) []string {
-	//TODO
-	return nil;
+	var env []string;
+	if Env_vars == "" {
+		return nil;
+	}
+	env = strings.Split(Env_vars, ",");
+	return env;
 }
 
 func check_work_dir(Work_dir string) string {
@@ -135,8 +166,20 @@ func check_work_dir(Work_dir string) string {
 }
 
 func check_umask(Umask string) uint {
-	//TODO
-	return 0;
+	var umask int;
+	var err error;
+	if Umask == "" {
+		return 8;
+	}
+	for i := 0; i < len(Umask); i++ {
+		c := Umask[i];
+		if !(c >= 48 && c <= 55) {
+			rise_error(errors.New("Umask is not valid"));
+		}
+	}
+	umask, err = strconv.Atoi(Umask);
+	rise_error(err);
+	return uint(umask);
 }
 
 func fill_program_array(programs *[]program, e *Elements) {
