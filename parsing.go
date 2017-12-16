@@ -37,13 +37,15 @@ func check_cmd(Cmd string) string {
 
 func check_num_procs(Num_procs string) uint {
 	var num_procs int;
+	var err error;
 
 	if Num_procs == "" {
-		return rise_error(errors.New("Num_procs is empty"));
+		rise_error(errors.New("Num_procs is empty"));
 	}
-	num_procs = strconv.Atoi(Num_procs);
+	num_procs, err = strconv.Atoi(Num_procs);
+	rise_error(err);
 	if num_procs <= 0 {
-		return rise_error(errors.New("Num_procs is <= 0"));
+		rise_error(errors.New("Num_procs is <= 0"));
 	}
 	return uint(num_procs);
 }
