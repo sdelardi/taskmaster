@@ -2,28 +2,30 @@ package main
 
 import "encoding/xml";
 import "io/ioutil";
-import "os";
-import "fmt";
-
-func check(e error) {
-	if e != nil {
-		fmt.Printf("error: %v\n", e);
-		os.Exit(1);
-	}
-}
+import "errors";
+import "strconv";
+import "strings";
 
 func parse_config(path string, programs *[]program) {
 	e := Elements{};
 	dat, err := ioutil.ReadFile(path);
-	check(err);
+	rise_error(err);
 	err = xml.Unmarshal([]byte(dat), &e);
-	check(err);
+	rise_error(err);
 	fill_program_array(programs, &e);
 }
 
 func check_name(Name string) string {
-	//TODO
-	return "";
+	if Name == "" {
+		rise_error(errors.New("Name is empty"));
+	}
+	for i := 0; i < len(Name); i++ {
+		c := Name[i];
+		if !((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
+			rise_error(errors.New("Name is not correctly formatted, only letters and digits are allowed"));
+		}
+	}
+	return Name;
 }
 
 func check_cmd(Cmd string) string {
@@ -37,18 +39,37 @@ func check_num_procs(Num_procs string) uint {
 }
 
 func check_autostart(Autostart string) bool {
-	//TODO
-	return true;
+	if Autostart == "true" {
+		return true;
+	} else if Autostart == "false" || Autostart == "" {
+		return false;
+	} else {
+		rise_error(errors.New("Autostart has wrong value"));
+	}
+	return false;
 }
 
 func check_restart(Restart string) string {
-	//TODO
-	return "";
+	if Restart == "" {
+		rise_error(errors.New("Restart is empty"));
+	}
+	if !(Restart == "unexpected" || Restart == "always" || Restart == "never") {
+		rise_error(errors.New("Restart has wrong value"));
+	}
+	return Restart;
 }
 
 func check_exit_codes(Exit_codes string) []int {
-	//TODO
-	return nil;
+	var codes []string;
+	var int_codes []int;
+	codes = strings.Split(Exit_codes, ",");
+	int_codes = make([]int, len(codes));
+	for i := 0; i < len(codes); i++ {
+		res, err := strconv.Atoi(codes[i]);
+		rise_error(err);
+		int_codes[i] = res;
+	}
+	return int_codes;
 }
 
 func check_starting_time(Starting_time string) uint {
