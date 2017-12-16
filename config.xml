@@ -1,25 +1,4 @@
 <Elements>
-<!---
-	<Element>
-		<Name></Name>
-		<Cmd></Cmd>
-		<Num_procs></Num_procs>
-		<Autostart></Autostart>
-		<Restart></Restart>
-		<Exit_codes></Exit_codes>
-		<Starting_time></Starting_time>
-		<Retry_abort></Retry_abort>
-		<Legit_signal></Legit_signal>
-		<Time_kill></Time_kill>
-		<Stdout>file</Stdout>
-		<Stdout_file></Stdout_file>
-		<Stderr></Stderr>
-		<Stderr_file></Stderr_file>
-		<Env_vars></Env_vars>
-		<Work_dir></Work_dir>
-		<Umask></Umask>
-	</Element>
--->
 	<Element>
 		<Name>nginx</Name>
 		<Cmd>/usr/local/bin/nginx -c /etc/nginx/test.conf</Cmd>
