@@ -147,8 +147,7 @@ func check_stdout(Stdout string) string {
 }
 
 func check_stdout_file(Stdout_file string) string {
-	//TODO
-	return "";
+	return Stdout_file;
 }
 
 func check_stderr(Stderr string) string {
@@ -157,8 +156,7 @@ func check_stderr(Stderr string) string {
 }
 
 func check_stderr_file(Stderr_file string) string {
-	//TODO
-	return "";
+	return Stderr_file;
 }
 
 func check_env_vars(Env_vars string) []string {
