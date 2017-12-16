@@ -1,5 +1,33 @@
 package main
 
+import "encoding/xml";
+
+type Element struct {
+	XMLName         xml.Name `xml:"Element"`;
+	Name            string  `xml:"Name"`;
+	Cmd             string  `xml:"Cmd"`;
+	Autostart       string  `xml:"Autostart"`;
+	Restart         string  `xml:"Restart"`;
+	Exit_codes      string  `xml:"Exit_codes"`;
+	Starting_time   string  `xml:"Starting_time"`;
+	Retry_abort     string  `xml:"Retry_abort"`;
+	Legit_signal    string  `xml:"Legit_signal"`;
+	Time_kill       string  `xml:"Time_kill"`;
+	Stdout          string  `xml:"Stdout"`;
+	Stdout_file     string  `xml:"Stdout_file"`;
+	Stderr          string  `xml:"Stderr"`;
+	Stderr_file     string  `xml:"Stderr_file"`;
+	Env_vars        string  `xml:"Env_vars"`;
+	Work_dir        string  `xml:"Work_dir"`;
+	Umask           string  `xml:"Umask"`;
+
+}
+
+type Elements struct {
+	XMLName     xml.Name    `xml:"Elements"`;
+	Elements    []Element   `xml:"Element"`;
+}
+
 type process struct {
 	pid int;
 	ppid int;
