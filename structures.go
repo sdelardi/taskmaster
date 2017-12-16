@@ -6,6 +6,7 @@ type Element struct {
 	XMLName         xml.Name `xml:"Element"`;
 	Name            string  `xml:"Name"`;
 	Cmd             string  `xml:"Cmd"`;
+	Num_procs		string	`xml:"Num_procs"`;
 	Autostart       string  `xml:"Autostart"`;
 	Restart         string  `xml:"Restart"`;
 	Exit_codes      string  `xml:"Exit_codes"`;

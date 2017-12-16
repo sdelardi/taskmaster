@@ -12,12 +12,13 @@ func check(e error) {
 	}
 }
 
-func parse_config(path string) {
-	v := Elements{};
+func parse_config(path string, programs *[]program) {
+	e := Elements{};
 	dat, err := ioutil.ReadFile(path);
 	check(err);
-	e := xml.Unmarshal([]byte(dat), &v);
-	check(e);
+	err = xml.Unmarshal([]byte(dat), &e);
+	check(err);
+	fill_program_array(programs, &e);
 }
 
 func check_name(Name string) string {
@@ -106,6 +107,7 @@ func check_umask(Umask string) uint {
 }
 
 func fill_program_array(programs *[]program, e *Elements) {
+	*programs = make([]program, len(e.Elements));
 	for i := 0; i < len(e.Elements); i++ {
 		(*programs)[i].name = check_name(e.Elements[i].Name);
 		(*programs)[i].cmd = check_cmd(e.Elements[i].Cmd);
