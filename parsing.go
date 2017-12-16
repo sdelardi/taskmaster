@@ -4,6 +4,7 @@ import "encoding/xml";
 import "io/ioutil";
 import "os";
 import "fmt";
+import "strconv"
 
 func check(e error) {
 	if e != nil {
@@ -27,13 +28,23 @@ func check_name(Name string) string {
 }
 
 func check_cmd(Cmd string) string {
-	//TODO
-	return "";
+	if Cmd == "" {
+		rise_error(errors.New("Cmd is empty"))
+	}
+	return Cmd;
 }
 
 func check_num_procs(Num_procs string) uint {
-	//TODO
-	return 0;
+	var num_procs int;
+
+	if Num_procs == "" {
+		return rise_error(errors.New("Num_procs is empty"));
+	}
+	num_procs = strconv.Atoi(Num_procs);
+	if num_procs <= 0 {
+		return rise_error(errors.New("Num_procs is <= 0"));
+	}
+	return uint(num_procs);
 }
 
 func check_autostart(Autostart string) bool {
